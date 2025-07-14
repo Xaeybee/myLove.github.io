@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sana Özür Borçluyum</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Quicksand', sans-serif;
+      background-color: #ffd1dc;
+      position: relative;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: nowrap;
+    }
+
+    /* DEĞİŞEN KISIM - BAŞLANGIÇ */
+    .heart {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="white" d="M471.7,73.6c-54.5-46.4-136-38.6-186.4,13.4L256,118.8l-29.3-31.7c-50.4-52-131.9-59.8-186.4-13.4 C-7.6,119.3-9.3,202.9,43,256l192.6,201.5c11.7,12.3,30.7,12.3,42.4,0L469,256C521.3,202.9,519.6,119.3,471.7,73.6z"/></svg>');
+      -webkit-mask-size: cover;
+      -webkit-mask-repeat: no-repeat;
+      mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="white" d="M471.7,73.6c-54.5-46.4-136-38.6-186.4,13.4L256,118.8l-29.3-31.7c-50.4-52-131.9-59.8-186.4-13.4 C-7.6,119.3-9.3,202.9,43,256l192.6,201.5c11.7,12.3,30.7,12.3,42.4,0L469,256C521.3,202.9,519.6,119.3,471.7,73.6z"/></svg>');
+      mask-size: cover;
+      mask-repeat: no-repeat;
+    }
+
+    .heart img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: all 0.3s ease;
+    }
+
+    .heart:hover img {
+      transform: scale(1.1);
+       /* Büyürken kenarlarda boşluk bıraksın */
+    }
+    /* DEĞİŞEN KISIM - BİTİŞ */
+
+    .message {
+      max-width: 900px;
+      background: #c7a9a9;
+      margin: 60px auto;
+      padding: 30px;
+      border-radius: 16px;
+      font-size: 18px;
+      line-height: 1.8;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      color:white
+    }
+
+    .buttons {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 80px;
+    }
+
+    .heart-button {
+      width: 220px;
+      height: 220px;
+      border: none;
+      background-color: pink;
+      color: white;
+      font-size: 16px;
+      padding: 20px;
+      cursor: pointer;
+      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="white" d="M471.7,73.6c-54.5-46.4-136-38.6-186.4,13.4L256,118.8l-29.3-31.7c-50.4-52-131.9-59.8-186.4-13.4 C-7.6,119.3-9.3,202.9,43,256l192.6,201.5c11.7,12.3,30.7,12.3,42.4,0L469,256C521.3,202.9,519.6,119.3,471.7,73.6z"/></svg>');
+      -webkit-mask-size: cover;
+      mask-size: cover;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .heart-button:hover {
+      background-color: white;
+      color: pink;
+    }
+
+    .rectangle-button {
+      background-color: black;
+      color: white;
+      font-size: 16px;
+      padding: 20px 30px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .rectangle-button:hover {
+      background-color: white;
+      color: black;
+    }
+
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(2, 140px);
+      }
+
+      .heart,
+      .heart-button {
+        width: 140px;
+        height: 140px;
+      }
+      
+      .heart img {
+        width: 140px;
+        height: 140px;
+      }
+    }
+    .heart.flipped img {
+  transform: rotateY(180deg);
+}
+
+.heart-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 22px;
+  color: white;
+  text-shadow: 2px 2px 4px #000;
+  z-index: 2;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.heart.flipped .heart-text {
+  opacity: 1;
+}
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+
+  <div class="content">
+    <div class="gallery">
+      <div class="row row1">
+        <!-- DEĞİŞEN KISIM - BAŞLANGIÇ -->
+        <div class="heart" data-index="0">
+          <img src="images/mylove1.jpg" alt="Sevgilim">
+        </div>
+        <div class="heart" data-index="1">
+          <img src="images/mylove2.jpg" alt="Sevgilim">
+        </div>
+        <div class="heart" data-index="2">
+          <img src="images/mylove3.jpg" alt="Sevgilim">
+        </div>
+        <div class="heart" data-index="3">
+          <img src="images/mylove4.jpg" alt="Sevgilim">
+        </div>
+        <div class="heart" data-index="4">
+          <img src="images/mylove51.jpg" alt="Sevgilim">
+        </div>
+        <!-- DEĞİŞEN KISIM - BİTİŞ -->
+      </div>
+      <div class="row row2">
+        <!-- DEĞİŞEN KISIM - BAŞLANGIÇ -->
+        <div class="heart" data-index="5">
+          <img src="images/mylove61.jpg" alt="Sevgilim">
+        </div>
+        <div class="heart" data-index="6">
+          <img src="images/mylove7.jpg" alt="Sevgilim">
+        </div>
+        <div class="heart" data-index="7">
+          <img src="images/mylove81.jpg" alt="Sevgilim">
+        </div>
+        <div class="heart" data-index="8">
+          <img src="images/mylove9.jpg" alt="Sevgilim">
+        </div>
+        <div class="heart" data-index="9">
+          <img src="images/mylove10.jpg" alt="Sevgilim">
+        </div>
+        <!-- DEĞİŞEN KISIM - BİTİŞ -->
+      </div>
+    </div>
+
+    <!-- Mesaj ve butonlar aynı kalıyor -->
+    <div class="message">
+      Acısıyla, tatlısıyla 1 yıl 7 ay 5 gün geçti tam. Her saniyesinde tüm duygularımı iliklerine kadar hissettiğim bu
+      ilişki, iyi ki olmuş dedim her geçen gün. Üzüldük, ağladık, sevindik, güldük.. ama en çok sevdik, benim güzel
+      sevgilim çok sevdik. <br><br>
+      Kırdığım o minik kalbini düşünmeden geçirdiğim bir günüm bile olmadı, olmayacak. Davranışlarım, tavrım,
+      hareketlerim... Her saniye düşündüm durdum ve kendime sordum:" Napıyorum lan ben? Bir prensese böyle mi
+      davranacaksın Şevki?" dedim kendim ve farkına vardım. Ben değişmiştim. Sadece sevmenin bu olmadığını; aşkın,
+      sana nasıl davranmam gerektiğini aslında bana söylediğini farkettim. Ben senin için DEĞİŞTİM ve bu aslında seni
+      üzen bir değişimdi. Normale dönmeye çalıştım ancak hep bir sorun çıktı. Bir sorunu hallettik ancak öteki bir
+      sorun çıktı ama sensiz kalınca, acıyı yaşayınca anladım ki aslında sorun sana karşı değişmemdeymiş. Sana
+      sevgilimmiş gibi değil, triplerimi çeken biri olarak davranmışım zaman zaman ve bu da hem beni hem seni
+      mahvetti. Artık senin de dediğin gibi bitti. İstemiyorum. Yorulmaktan bıktım. ve bunu da sana gerçekten hakkettiğin
+      gibi davranarak yapacağım. Çünkü ben sana çok çokkk aşığım. <br><br>
+      Geçmişte yaşananlar, yeni birşey inşa etmeyi asla engellemez. Aksine buna fayda sağlar. Ben de kendimi inşa
+      ettim ve sana da ilişkimizin dinamiklerini el ele tekrar inşa etmek için yalvarıyorum. Sana daha iyi
+      davranmayacak olsam inan önce seni yormam, yoramam. <br><br>
+      Çok çok özür dilerim, üzgünüm, lütfen beni affet ama önce gel ilişkimizi beraber, baştan yaratalım.
+    </div>
+
+    <div class="buttons">
+      <div id="reaction-message" style="margin-top: 20px; font-size: 20px; color: #444; text-align: center;"></div>
+      <button class="heart-button">Evet, ilişkimizi güzelleştirelim</button>
+      <button class="rectangle-button">Hayır, yarım kalsın hikayemiz</button>
+    </div>
+  </div>
+
+  <script>
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let hearts = [];
+
+  function createHeart() {
+    const size = Math.random() * 20 + 10;
+    hearts.push({
+      x: Math.random() * canvas.width,
+      y: canvas.height + size,
+      size: size,
+      speed: Math.random() * 1 + 0.5,
+      opacity: Math.random() * 0.5 + 0.3
+    });
+  }
+
+  function drawHeart(x, y, size, opacity) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.globalAlpha = opacity;
+    ctx.fillStyle = '#87CEFA';
+    ctx.moveTo(x, y);
+    ctx.bezierCurveTo(x - size / 2, y - size / 2, x - size, y + size / 3, x, y + size);
+    ctx.bezierCurveTo(x + size, y + size / 3, x + size / 2, y - size / 2, x, y);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (Math.random() < 0.2) createHeart();
+    hearts.forEach((heart, index) => {
+      heart.y -= heart.speed;
+      drawHeart(heart.x, heart.y, heart.size, heart.opacity);
+      if (heart.y + heart.size < 0) hearts.splice(index, 1);
+    });
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  // Kalplerin dönüşü ve yazılar
+  const heartEls = document.querySelectorAll('.heart');
+  const texts = ["Ruhum", "Kalbim", "Bedenim", "Hissim", "Aşkım", "Bebeğim", "Güzelim", "Çiçeğim", "Hayatım", "Herşeyim"];
+
+  heartEls.forEach((heart, index) => {
+    const textEl = document.createElement("div");
+    textEl.className = "heart-text";
+    textEl.textContent = texts[index];
+    heart.appendChild(textEl);
+
+    heart.addEventListener('click', () => {
+      heart.classList.toggle('flipped');
+    });
+  });
+  
+  const hayirBtn = document.querySelector('.rectangle-button');
+  const evetBtn = document.querySelector('.heart-button');
+  const reactionMsg = document.getElementById('reaction-message');
+  let hayirClickCount = 0;
+
+  const hayirMessages = [
+    "Emin misin? 🥺",
+    "Son kararın mı? 😔",
+    "Bu son şansın... 😢"
+  ];
+
+  hayirBtn.addEventListener('click', () => {
+    if (hayirClickCount < hayirMessages.length) {
+      reactionMsg.innerHTML = hayirMessages[hayirClickCount];
+      hayirBtn.style.transform = `scale(${1 - hayirClickCount * 0.2})`;
+      hayirClickCount++;
+    } else {
+      hayirBtn.style.display = 'none';
+      reactionMsg.innerHTML = '';
+    }
+  });
+
+  evetBtn.addEventListener('click', () => {
+    reactionMsg.innerHTML = `ÇOK TEŞEKKÜRLER BEBEĞİM ❤️🎉<br>SENİ ASLA YARI YOLDA BIRAKMICAM`;
+    reactionMsg.style.fontSize = '24px';
+    reactionMsg.style.color = '#d0006f';
+  });
+
+
+</script>
+
+</body>
+
+</html>
