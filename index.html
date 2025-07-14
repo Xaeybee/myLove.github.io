@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Tek Aşkıma,Son Özrüm</title>
+  <title>Sonsuzluğa Olan Aşkıma,Son özrüm</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap">
   <style>
     html,
@@ -22,6 +22,16 @@
       left: 0;
       z-index: 0;
       pointer-events: none;
+    }
+
+    .photo-message {
+      font-size: 20px;
+      color: #001f3f;
+      /* Lacivert ton */
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      padding: 0 10px;
     }
 
     .content {
@@ -48,7 +58,7 @@
       flex-wrap: nowrap;
     }
 
-    /* DEĞİŞEN KISIM - BAŞLANGIÇ */
+
     .heart {
       width: 200px;
       height: 200px;
@@ -71,9 +81,9 @@
 
     .heart:hover img {
       transform: scale(1.1);
-       /* Büyürken kenarlarda boşluk bıraksın */
+
     }
-    /* DEĞİŞEN KISIM - BİTİŞ */
+
 
     .message {
       max-width: 900px;
@@ -85,7 +95,7 @@
       line-height: 1.8;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
       text-align: center;
-      color:white
+      color: white
     }
 
     .buttons {
@@ -146,34 +156,52 @@
         width: 140px;
         height: 140px;
       }
-      
+
       .heart img {
         width: 140px;
         height: 140px;
       }
     }
+
     .heart.flipped img {
-  transform: rotateY(180deg);
-}
+      transform: rotateY(180deg);
+    }
 
-.heart-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 22px;
-  color: white;
-  text-shadow: 2px 2px 4px #000;
-  z-index: 2;
-  text-align: center;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
+    .heart-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 22px;
+      color: white;
+      text-shadow: 2px 2px 4px #000;
+      z-index: 2;
+      text-align: center;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
 
-.heart.flipped .heart-text {
-  opacity: 1;
-}
+    .heart.flipped .heart-text {
+      opacity: 1;
+    }
+
+    #showMessageBtn {
+      background-color: #ff69b4;
+      color: white;
+      font-size: 18px;
+      padding: 20px 40px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 40px;
+    }
+
+    #showMessageBtn:hover {
+      background-color: white;
+      color: #ff69b4;
+    }
   </style>
 </head>
 
@@ -181,9 +209,12 @@
   <canvas id="canvas"></canvas>
 
   <div class="content">
+    <p class="photo-message">
+      Birbirine en çok yakışan çiftin hikayesi... <br> Fotoğraflarımıza tıklamaya ne dersin?
+    </p>
     <div class="gallery">
       <div class="row row1">
-        <!-- DEĞİŞEN KISIM - BAŞLANGIÇ -->
+
         <div class="heart" data-index="0">
           <img src="images/mylove1.jpg" alt="Sevgilim">
         </div>
@@ -199,10 +230,8 @@
         <div class="heart" data-index="4">
           <img src="images/mylove51.jpg" alt="Sevgilim">
         </div>
-        <!-- DEĞİŞEN KISIM - BİTİŞ -->
       </div>
       <div class="row row2">
-        <!-- DEĞİŞEN KISIM - BAŞLANGIÇ -->
         <div class="heart" data-index="5">
           <img src="images/mylove61.jpg" alt="Sevgilim">
         </div>
@@ -218,13 +247,14 @@
         <div class="heart" data-index="9">
           <img src="images/mylove10.jpg" alt="Sevgilim">
         </div>
-        <!-- DEĞİŞEN KISIM - BİTİŞ -->
       </div>
     </div>
-
-    <!-- Mesaj ve butonlar aynı kalıyor -->
-    <div class="message">
-      Acısıyla, tatlısıyla 1 yıl 7 ay 5 gün geçti tam. Her saniyesinde tüm duygularımı iliklerine kadar hissettiğim bu
+    <button id="showMessageBtn" class="rectangle-button" style="margin-top: 40px;">
+      Aşkım, Burdayım!
+    </button>
+    <audio id="asktiBuAudio" src="AsktiBu.mp3"></audio>
+    <div class="message" style="display: none;">
+      Acısıyla, tatlısıyla 1 yıl 7 ay 5 gün geçti tam. Her saniyesinde tüm duygularımı iliklerime kadar hissettiğim bu
       ilişki, iyi ki olmuş dedim her geçen gün. Üzüldük, ağladık, sevindik, güldük.. ama en çok sevdik, benim güzel
       sevgilim çok sevdik. <br><br>
       Kırdığım o minik kalbini düşünmeden geçirdiğim bir günüm bile olmadı, olmayacak. Davranışlarım, tavrım,
@@ -234,7 +264,8 @@
       üzen bir değişimdi. Normale dönmeye çalıştım ancak hep bir sorun çıktı. Bir sorunu hallettik ancak öteki bir
       sorun çıktı ama sensiz kalınca, acıyı yaşayınca anladım ki aslında sorun sana karşı değişmemdeymiş. Sana
       sevgilimmiş gibi değil, triplerimi çeken biri olarak davranmışım zaman zaman ve bu da hem beni hem seni
-      mahvetti. Artık senin de dediğin gibi bitti. İstemiyorum. Yorulmaktan bıktım. ve bunu da sana gerçekten hakkettiğin
+      mahvetti. Artık senin de dediğin gibi bitti. İstemiyorum. Yorulmaktan bıktım. ve bunu da sana gerçekten
+      hakkettiğin
       gibi davranarak yapacağım. Çünkü ben sana çok çokkk aşığım. <br><br>
       Geçmişte yaşananlar, yeni birşey inşa etmeyi asla engellemez. Aksine buna fayda sağlar. Ben de kendimi inşa
       ettim ve sana da ilişkimizin dinamiklerini el ele tekrar inşa etmek için yalvarıyorum. Sana daha iyi
@@ -242,102 +273,120 @@
       Çok çok özür dilerim, üzgünüm, lütfen beni affet ama önce gel ilişkimizi beraber, baştan yaratalım.
     </div>
 
-    <div class="buttons">
+    <div class="buttons" style="display: none;">
       <div id="reaction-message" style="margin-top: 20px; font-size: 20px; color: #444; text-align: center;"></div>
-      <button class="heart-button">Evet, ilişkimizi güzelleştirelim</button>
-      <button class="rectangle-button">Hayır, yarım kalsın hikayemiz</button>
+      <button class="heart-button" id="evetBtn">Evet, ilişkimizi güzelleştirelim</button>
+      <button class="rectangle-button" id="hayirBtn">Hayır, yarım kalsın hikayemiz</button>
     </div>
   </div>
 
   <script>
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
 
-  let hearts = [];
-
-  function createHeart() {
-    const size = Math.random() * 20 + 10;
-    hearts.push({
-      x: Math.random() * canvas.width,
-      y: canvas.height + size,
-      size: size,
-      speed: Math.random() * 1 + 0.5,
-      opacity: Math.random() * 0.5 + 0.3
-    });
-  }
-
-  function drawHeart(x, y, size, opacity) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.globalAlpha = opacity;
-    ctx.fillStyle = '#87CEFA';
-    ctx.moveTo(x, y);
-    ctx.bezierCurveTo(x - size / 2, y - size / 2, x - size, y + size / 3, x, y + size);
-    ctx.bezierCurveTo(x + size, y + size / 3, x + size / 2, y - size / 2, x, y);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    if (Math.random() < 0.2) createHeart();
-    hearts.forEach((heart, index) => {
-      heart.y -= heart.speed;
-      drawHeart(heart.x, heart.y, heart.size, heart.opacity);
-      if (heart.y + heart.size < 0) hearts.splice(index, 1);
-    });
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-
-  // Kalplerin dönüşü ve yazılar
-  const heartEls = document.querySelectorAll('.heart');
-  const texts = ["Ruhum", "Kalbim", "Bedenim", "Hissim", "Aşkım", "Bebeğim", "Güzelim", "Çiçeğim", "Hayatım", "Herşeyim"];
-
-  heartEls.forEach((heart, index) => {
-    const textEl = document.createElement("div");
-    textEl.className = "heart-text";
-    textEl.textContent = texts[index];
-    heart.appendChild(textEl);
-
-    heart.addEventListener('click', () => {
-      heart.classList.toggle('flipped');
-    });
-  });
-  
-  const hayirBtn = document.querySelector('.rectangle-button');
-  const evetBtn = document.querySelector('.heart-button');
-  const reactionMsg = document.getElementById('reaction-message');
-  let hayirClickCount = 0;
-
-  const hayirMessages = [
-    "Emin misin? 🥺",
-    "Son kararın mı? 😔",
-    "Bu son şansın... 😢"
-  ];
-
-  hayirBtn.addEventListener('click', () => {
-    if (hayirClickCount < hayirMessages.length) {
-      reactionMsg.innerHTML = hayirMessages[hayirClickCount];
-      hayirBtn.style.transform = `scale(${1 - hayirClickCount * 0.2})`;
-      hayirClickCount++;
-    } else {
-      hayirBtn.style.display = 'none';
-      reactionMsg.innerHTML = '';
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     }
-  });
 
-  evetBtn.addEventListener('click', () => {
-    reactionMsg.innerHTML = `ÇOK TEŞEKKÜRLER BEBEĞİM ❤️🎉<br>SENİ ASLA YARI YOLDA BIRAKMICAM`;
-    reactionMsg.style.fontSize = '24px';
-    reactionMsg.style.color = '#d0006f';
-  });
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    let hearts = [];
+
+    function createHeart() {
+      const size = Math.random() * 20 + 10;
+      hearts.push({
+        x: Math.random() * canvas.width,
+        y: canvas.height + size,
+        size: size,
+        speed: Math.random() * 1 + 0.5,
+        opacity: Math.random() * 0.5 + 0.3
+      });
+    }
+
+    function drawHeart(x, y, size, opacity) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.globalAlpha = opacity;
+      ctx.fillStyle = '#87CEFA';
+      ctx.moveTo(x, y);
+      ctx.bezierCurveTo(x - size / 2, y - size / 2, x - size, y + size / 3, x, y + size);
+      ctx.bezierCurveTo(x + size, y + size / 3, x + size / 2, y - size / 2, x, y);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (Math.random() < 0.2) createHeart();
+      hearts.forEach((heart, index) => {
+        heart.y -= heart.speed;
+        drawHeart(heart.x, heart.y, heart.size, heart.opacity);
+        if (heart.y + heart.size < 0) hearts.splice(index, 1);
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
 
 
-</script>
+    const heartEls = document.querySelectorAll('.heart');
+    const texts = ["Ruhum", "Kalbim", "Bedenim", "Hissim", "Aşkım", "Bebeğim", "Güzelim", "Çiçeğim", "Hayatım", "Herşeyim"];
+
+    heartEls.forEach((heart, index) => {
+      const textEl = document.createElement("div");
+      textEl.className = "heart-text";
+      textEl.textContent = texts[index];
+      heart.appendChild(textEl);
+
+      heart.addEventListener('click', () => {
+        heart.classList.toggle('flipped');
+      });
+    });
+
+    const hayirBtn = document.getElementById('hayirBtn');
+    const evetBtn = document.getElementById('evetBtn');
+    const reactionMsg = document.getElementById('reaction-message');
+    let hayirClickCount = 0;
+
+    const hayirMessages = [
+      "Emin misin birrrtanem? 🥺",
+      "Son kararın mı bebeğimm? 😔",
+      "Bunu bize yapma... 😢"
+    ];
+
+    hayirBtn.addEventListener('click', () => {
+      if (hayirClickCount < hayirMessages.length) {
+        reactionMsg.innerHTML = hayirMessages[hayirClickCount];
+        hayirBtn.style.transform = `scale(${1 - hayirClickCount * 0.2})`;
+        hayirClickCount++;
+      } else {
+        hayirBtn.style.display = 'none';
+        reactionMsg.innerHTML = '';
+      }
+    });
+
+    evetBtn.addEventListener('click', () => {
+      reactionMsg.innerHTML = `ÇOK TEŞEKKÜRLER BEBEĞİM ❤️🎉<br>SENİ ASLA YARI YOLDA BIRAKMICAM`;
+      reactionMsg.style.fontSize = '24px';
+      reactionMsg.style.color = '#d0006f';
+    });
+    const showMessageBtn = document.getElementById("showMessageBtn");
+    const messageDiv = document.querySelector(".message");
+    const buttonsDiv = document.querySelector(".buttons");
+    const audio = document.getElementById("asktiBuAudio");
+
+    showMessageBtn.addEventListener("click", () => {
+      messageDiv.style.display = "block";    // mesajı göster
+      buttonsDiv.style.display = "flex";     // butonları göster
+      showMessageBtn.style.display = "none"; // açma butonunu gizle
+      audio.volume = 0.1;                    // ses seviyesi %20
+      audio.play();                          // müziği çal
+    });
+
+
+  </script>
 
 </body>
 
